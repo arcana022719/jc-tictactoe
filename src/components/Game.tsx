@@ -4,7 +4,7 @@ import './Game.css';
 import { useGame } from '../hooks/useGame';
 
 const Game: React.FC = () => {
-  const { gameState, makeMove, resetGame, jumpTo } = useGame();
+  const { gameState, makeMove, resetGame, jumpTo, resetScores } = useGame();
 
   const status = gameState.winner
     ? `Winner: ${gameState.winner}`
@@ -19,9 +19,21 @@ const Game: React.FC = () => {
         {(gameState.gameOver || gameState.board.some(Boolean)) && (
           <button onClick={resetGame}>Reset</button>
         )}
-        <div style={{ marginTop: 12 }}>
-          <div>Moves: {gameState.history.length - 1}</div>
-          <ol style={{ paddingLeft: 18 }}>
+        <div className="scores">
+          <strong>Scores:</strong>
+          <span>X: {gameState.scores.X}</span>
+          <span>O: {gameState.scores.O}</span>
+          <span>Draws: {gameState.scores.draws}</span>
+          <button onClick={resetScores}>Reset Scores</button>
+        </div>
+      </div>
+      <div className="game-content">
+        <div className="game-board">
+          <Board squares={gameState.board} onSquareClick={makeMove} />
+        </div>
+        <aside className="game-history" aria-label="Move history">
+          <div className="moves-header">Moves: {gameState.history.length - 1}</div>
+          <ol>
             {gameState.history.map((_, move) => {
               const desc = move ? `Go to move #${move}` : 'Go to game start';
               const isCurrent = move === gameState.step;
@@ -34,10 +46,7 @@ const Game: React.FC = () => {
               );
             })}
           </ol>
-        </div>
-      </div>
-      <div className="game-board">
-        <Board squares={gameState.board} onSquareClick={makeMove} />
+        </aside>
       </div>
     </div>
   );
