@@ -9,3 +9,8 @@ export interface GameState {
   isDraw: boolean;
   gameOver: boolean;
 }
+
+export interface GameWithHistory extends GameState {
+  history: BoardState[];
+  step: number; // index in history representing current board
+}
