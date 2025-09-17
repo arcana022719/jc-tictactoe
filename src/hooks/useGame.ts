@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { GameWithHistory, Player, BoardState } from '../types/game';
+import { GameWithHistory, Player, BoardState, Scores } from '../types/game';
 import { getInitialBoard, makeMove as applyMove, checkWinner, checkDraw } from '../utils/gameLogic';
 
 export const useGame = () => {
-  const [gameState, setGameState] = useState<GameWithHistory>({
+  const [gameState, setGameState] = useState<GameWithHistory & { scores: Scores }>({
     board: getInitialBoard(),
     currentPlayer: 'X',
     winner: null,
@@ -11,6 +11,7 @@ export const useGame = () => {
     gameOver: false,
     history: [getInitialBoard()],
     step: 0,
+    scores: { X: 0, O: 0, draws: 0 },
   });
 
   const makeMove = (index: number) => {
@@ -31,6 +32,14 @@ export const useGame = () => {
       : 'X';
 
     const newHistory = [...gameState.history.slice(0, gameState.step + 1), updatedBoard];
+    // Update scores if game ends
+    const scores: Scores = { ...gameState.scores };
+    if (gameOver) {
+      if (winner === 'X') scores.X += 1;
+      else if (winner === 'O') scores.O += 1;
+      else if (isDraw) scores.draws += 1;
+    }
+
     setGameState({
       board: updatedBoard,
       currentPlayer: nextPlayer,
@@ -39,6 +48,7 @@ export const useGame = () => {
       gameOver,
       history: newHistory,
       step: newHistory.length - 1,
+      scores,
     });
   };
 
@@ -52,6 +62,7 @@ export const useGame = () => {
       gameOver: false,
       history: [initial],
       step: 0,
+      scores: gameState.scores,
     });
   };
 
@@ -71,7 +82,15 @@ export const useGame = () => {
       gameOver,
       history: gameState.history,
       step,
+      scores: gameState.scores,
     });
+  };
+
+  const resetScores = () => {
+    setGameState((prev) => ({
+      ...prev,
+      scores: { X: 0, O: 0, draws: 0 },
+    }));
   };
 
   return {
@@ -79,5 +98,6 @@ export const useGame = () => {
     makeMove,
     resetGame,
     jumpTo,
+  resetScores,
   };
 };

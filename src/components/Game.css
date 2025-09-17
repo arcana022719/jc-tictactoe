@@ -23,3 +23,35 @@
   display: flex;
   justify-content: center;
 }
+
+.game-content {
+  display: grid;
+  grid-template-columns: auto 240px; /* board width auto, 240px history sidebar */
+  align-items: start;
+  gap: 16px;
+}
+
+.game-history {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  padding: 12px;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.game-history ol {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+.moves-header {
+  font-weight: 600;
+}
+
+.scores {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  align-items: center;
+}

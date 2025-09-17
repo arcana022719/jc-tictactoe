@@ -14,3 +14,9 @@ export interface GameWithHistory extends GameState {
   history: BoardState[];
   step: number; // index in history representing current board
 }
+
+export interface Scores {
+  X: number;
+  O: number;
+  draws: number;
+}
