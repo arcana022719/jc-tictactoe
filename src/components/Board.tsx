@@ -2,9 +2,14 @@ import React from 'react';
 import Square from './Square';
 import './Board.css';
 
-const Board: React.FC = () => {
+interface BoardProps {
+  squares: (string | null)[];
+  onSquareClick: (index: number) => void;
+}
+
+const Board: React.FC<BoardProps> = ({ squares, onSquareClick }) => {
   const renderSquare = (i: number) => {
-    return <Square value="" onClick={() => {}} />;
+    return <Square value={squares[i]} onClick={() => onSquareClick(i)} />;
   };
 
   return (
