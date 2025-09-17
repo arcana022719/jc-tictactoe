@@ -7,16 +7,21 @@
 
 .game-info {
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 
 .status {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  padding: 10px;
-  background-color: #e8f4fd;
-  border-radius: 8px;
-  border: 2px solid #2196f3;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e5e7eb;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
 }
 
 .game-board {
@@ -26,18 +31,24 @@
 
 .game-content {
   display: grid;
-  grid-template-columns: auto 240px; /* board width auto, 240px history sidebar */
+  grid-template-columns: auto 260px; /* board + sidebar */
   align-items: start;
-  gap: 16px;
+  gap: 18px;
+}
+
+.game-content.no-history {
+  grid-template-columns: 1fr;
 }
 
 .game-history {
-  background: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e5e7eb;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 12px;
-  max-height: 360px;
+  max-height: 380px;
   overflow: auto;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
 }
 
 .game-history ol {
@@ -46,7 +57,7 @@
 }
 
 .moves-header {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .scores {
@@ -54,4 +65,42 @@
   gap: 12px;
   margin-top: 10px;
   align-items: center;
+  color: #e5e7eb;
+}
+
+.game-info button,
+.game-history button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.08s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.game-info button:hover,
+.game-history button:hover {
+  background: #1d4ed8;
+}
+
+.game-info button:active,
+.game-history button:active {
+  transform: translateY(1px);
+}
+
+.game-history button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+@media (max-width: 700px) {
+  .game-content {
+    grid-template-columns: 1fr;
+  }
+  .game-history {
+    max-height: none;
+    width: 100%;
+  }
 }
