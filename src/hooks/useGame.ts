@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { GameState, BoardState, Player } from '../types/game';
-import { getInitialBoard } from '../utils/gameLogic';
+import { GameState, Player } from '../types/game';
+import { getInitialBoard, makeMove as applyMove, checkWinner, checkDraw } from '../utils/gameLogic';
 
-// Custom hook for managing game state
-// This is a placeholder - logic will be implemented later
 export const useGame = () => {
   const [gameState, setGameState] = useState<GameState>({
     board: getInitialBoard(),
@@ -14,13 +12,37 @@ export const useGame = () => {
   });
 
   const makeMove = (index: number) => {
-    // TODO: Implement move logic
-    console.log(`Move made at index: ${index}`);
+    if (gameState.gameOver) return;
+
+    const updatedBoard = applyMove(gameState.board, index, gameState.currentPlayer);
+    if (!updatedBoard) return; // invalid move
+
+    const winner = checkWinner(updatedBoard);
+    const isDraw = !winner && checkDraw(updatedBoard);
+    const gameOver = Boolean(winner || isDraw);
+    const nextPlayer: Player = gameOver
+      ? gameState.currentPlayer
+      : gameState.currentPlayer === 'X'
+      ? 'O'
+      : 'X';
+
+    setGameState({
+      board: updatedBoard,
+      currentPlayer: nextPlayer,
+      winner,
+      isDraw,
+      gameOver,
+    });
   };
 
   const resetGame = () => {
-    // TODO: Implement reset logic
-    console.log('Game reset');
+    setGameState({
+      board: getInitialBoard(),
+      currentPlayer: 'X',
+      winner: null,
+      isDraw: false,
+      gameOver: false,
+    });
   };
 
   return {
