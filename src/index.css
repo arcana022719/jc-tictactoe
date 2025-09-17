@@ -5,11 +5,15 @@ html, body, #root {
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #e5e7eb;
-  background: radial-gradient(1200px 600px at 12% 8%, #1f2937 0%, #0c1224 60%, #070b17 100%);
+  color: #d97706;
+  background: 
+    radial-gradient(circle at 85% 15%, rgba(255, 235, 59, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 15% 85%, rgba(255, 241, 118, 0.4) 0%, transparent 50%),
+    linear-gradient(135deg, #fffbeb 0%, #fef3c7 25%, #fde68a 75%, #fbbf24 100%);
+  min-height: 100vh;
 }
 
 code {
