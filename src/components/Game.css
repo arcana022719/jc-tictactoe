@@ -2,7 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
+  padding: 20px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .game-info {
@@ -14,14 +21,27 @@
 }
 
 .status {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  color: #e5e7eb;
-  padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(6px);
+  color: #d97706;
+  padding: 14px 20px;
+  background: linear-gradient(145deg, #ffffff, #fffbeb);
+  border-radius: 16px;
+  border: 2px solid #fde68a;
+  box-shadow: 
+    0 4px 12px rgba(253, 230, 138, 0.15),
+    0 2px 4px rgba(217, 119, 6, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.status:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 6px 16px rgba(253, 230, 138, 0.2),
+    0 3px 6px rgba(217, 119, 6, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .game-board {
@@ -31,7 +51,7 @@
 
 .game-content {
   display: grid;
-  grid-template-columns: auto 260px; /* board + sidebar */
+  grid-template-columns: auto 260px; 
   align-items: start;
   gap: 18px;
 }
@@ -41,14 +61,24 @@
 }
 
 .game-history {
-  background: rgba(255, 255, 255, 0.08);
-  color: #e5e7eb;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 12px;
-  max-height: 380px;
+  background: linear-gradient(145deg, #ffffff, #fffbeb);
+  color: #d97706;
+  border-radius: 18px;
+  border: 2px solid #fde68a;
+  padding: 16px;
+  max-height: 400px;
   overflow: auto;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+  box-shadow: 
+    0 8px 24px rgba(253, 230, 138, 0.2),
+    0 4px 8px rgba(217, 119, 6, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .game-history ol {
@@ -65,34 +95,65 @@
   gap: 12px;
   margin-top: 10px;
   align-items: center;
-  color: #e5e7eb;
+  color: #d97706;
 }
 
 .game-info button,
 .game-history button {
-  background: #2563eb;
-  color: white;
+  background: linear-gradient(145deg, #f59e0b, #d97706);
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 8px 10px;
+  border-radius: 12px;
+  padding: 10px 16px;
   cursor: pointer;
-  font-weight: 600;
-  transition: transform 0.08s ease, background 0.2s ease, opacity 0.2s ease;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+  box-shadow: 
+    0 4px 12px rgba(217, 119, 6, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-info button::before,
+.game-history button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
 .game-info button:hover,
 .game-history button:hover {
-  background: #1d4ed8;
+  background: linear-gradient(145deg, #fde68a, #f59e0b);
+  color: #d97706;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 16px rgba(217, 119, 6, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.game-info button:hover::before,
+.game-history button:hover::before {
+  left: 100%;
 }
 
 .game-info button:active,
 .game-history button:active {
-  transform: translateY(1px);
+  transform: translateY(0);
+  transition: transform 0.1s ease;
 }
 
 .game-history button:disabled {
   opacity: 0.6;
   cursor: default;
+  transform: none;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15);
 }
 
 @media (max-width: 700px) {

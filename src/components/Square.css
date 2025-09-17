@@ -1,39 +1,54 @@
-
 .square {
-  width: 88px;
-  height: 88px;
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #111827;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+	width: 96px;
+	height: 96px;
+	padding: 0;
+	flex: 0 0 96px; 
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font: inherit;
+	font-size: 2.5rem;
+	font-weight: 800;
+	line-height: 1;
+	color: #374151; 
+	background: linear-gradient(145deg, #ffffff, #fffbeb);
+	border: 2px solid #fde68a;
+	border-radius: 12px;
+	cursor: pointer;
+	user-select: none;
+	transition: transform 120ms ease, box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease;
+	box-shadow:
+		0 10px 20px rgba(253, 230, 138, 0.3),
+		0 2px 4px rgba(217, 119, 6, 0.15),
+		inset 0 2px 0 rgba(255, 255, 255, 0.9);
 }
 
 .square:hover {
-  background-color: #f3f4f6;
-  transform: translateY(-1px);
+	transform: translateY(-2px);
 }
 
 .square:active {
-  transform: translateY(0);
+	transform: translateY(0);
 }
 
-.square:focus {
-  outline: 2px solid #60a5fa;
-  outline-offset: 2px;
+.square:focus-visible {
+	outline: 3px solid #f59e0b;
+	outline-offset: 3px;
 }
+
 
 .square-X {
-  color: #ef4444; /* red-500 */
+	color: #dc2626;
+	text-shadow: 0 2px 6px rgba(220, 38, 38, 0.2);
 }
 
 .square-O {
-  color: #10b981; /* emerald-500 */
+	color: #16a34a; 
+	text-shadow: 0 2px 6px rgba(22, 163, 74, 0.2);
 }
+
+.square:disabled {
+	cursor: not-allowed;
+	opacity: 0.95;
+}
+
